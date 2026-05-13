@@ -810,7 +810,7 @@ function closePdfModal(){document.getElementById('pdfModal').classList.remove('o
 
 // PDF export
 async function exportPdfPlank(){
-  const btn=document.querySelector('[onclick="exportPdf()"]');const ot=btn.textContent;btn.textContent='⏳...';btn.disabled=true;
+  const btn=document.querySelector('[onclick="exportPdfPlank()"]');const ot=btn.textContent;btn.textContent='⏳...';btn.disabled=true;
   const sidebar=document.getElementById('sidebar');const sw=sidebar.style.width;sidebar.style.width='0';sidebar.style.overflow='hidden';
   const hide=['header','.status-bar','.sel-bar'];const els=hide.map(s=>document.querySelector(s));els.forEach(el=>{if(el)el.style.display='none';});
   try{
@@ -1159,11 +1159,9 @@ async function init(){
     await dbLoad();
     setupRealtime();
     upSel();
+    document.getElementById('loadingScreen').style.display='none';
     render();
     renderSB();
-    // Kleine vertraging zodat render klaar is
-    await new Promise(r=>setTimeout(r,100));
-    document.getElementById('loadingScreen').style.display='none';
   }catch(err){
     document.getElementById('loadingMsg').textContent='Fout: '+err.message+' — Herlaad de pagina.';
     console.error(err);
